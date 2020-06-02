@@ -33,9 +33,12 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     try {
       final currentLocation = await Geolocator()
           .getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
+      final placeName = await _getPlace(
+          LatLng(currentLocation.latitude, currentLocation.longitude));
       yield MapLoaded(
         currentPosition:
             LatLng(currentLocation.latitude, currentLocation.longitude),
+        placeName: placeName,
       );
     } catch (_) {
       yield MapError();
@@ -44,7 +47,8 @@ class MapBloc extends Bloc<MapEvent, MapState> {
 
   Stream<MapState> _mapAtmLookupToState(AtmLookup event) async* {
     try {
-      final markers = await placeRepository.getPlacesMarkers(location: event.location, radius: event.radius, type: event.type);
+      final markers = await placeRepository.getPlacesMarkers(
+          location: event.location, radius: event.radius, type: event.type);
       yield AtmLoaded(markers: markers);
     } catch (_) {
       yield LookupError();
@@ -53,10 +57,22 @@ class MapBloc extends Bloc<MapEvent, MapState> {
 
   Stream<MapState> _mapPharmaLookupToState(PharmaLookup event) async* {
     try {
-      final markers = await placeRepository.getPlacesMarkers(location: event.location, radius: event.radius, type: event.type);
+      final markers = await placeRepository.getPlacesMarkers(
+          location: event.location, radius: event.radius, type: event.type);
       yield PharmaLoaded(markers: markers);
     } catch (_) {
       yield LookupError();
     }
+  }
+
+  Future<String> _getPlace(LatLng userLocation) async {
+    List<Placemark> currentPlace;
+    try {
+      currentPlace = await Geolocator().placemarkFromCoordinates(
+          userLocation.latitude, userLocation.longitude);
+    } catch (e) {
+      currentPlace = null;
+    }
+    return currentPlace[0].locality;
   }
 }

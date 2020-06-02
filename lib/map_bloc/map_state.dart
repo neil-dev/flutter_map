@@ -12,11 +12,12 @@ abstract class MapState extends Equatable {
 
 class MapLoaded extends MapState {
   final LatLng currentPosition;
+  final String placeName;
 
-  const MapLoaded({@required this.currentPosition}) : assert(currentPosition != null);
+  const MapLoaded({@required this.currentPosition, this.placeName = 'Unknown'}) : assert(currentPosition != null);
 
   @override 
-  List<Object> get props => [currentPosition];
+  List<Object> get props => [currentPosition, placeName];
 }
 
 class MapEmpty extends MapState {}
