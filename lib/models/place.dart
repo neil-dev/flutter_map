@@ -5,15 +5,17 @@ class Place extends Equatable {
   final String icon;
   final String id;
   final String name;
+  final String type;
 
   const Place({
     this.location,
     this.icon,
     this.id,
     this.name,
+    this.type,
   });
 
-  List<Object> get props => [location, icon, id, name];
+  List<Object> get props => [location, icon, id, name, type];
 
   static List<Place> fromJson(dynamic json, String type) {
     final List<dynamic> places = json['results'];
@@ -23,6 +25,7 @@ class Place extends Equatable {
               icon: place['icon'],
               id: place['id'],
               name: place['name'],
+              type: type,
             ))
         .toList();
   }
