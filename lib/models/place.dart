@@ -19,14 +19,19 @@ class Place extends Equatable {
 
   static List<Place> fromJson(dynamic json, String type) {
     final List<dynamic> places = json['results'];
-    return places
-        .map((place) => Place(
-              location: place['geometry']['location'],
-              icon: place['icon'],
-              id: place['id'],
-              name: place['name'],
-              type: type,
-            ))
-        .toList();
+    print('Places: $places');
+    return places.map((place) {
+      print('location: ${place['geometry']['location']}');
+      print('icon: ${place['icon']}');
+      print('id: ${place['id']}');
+      print('name: ${place['name']}');
+      return Place(
+        location: place['geometry']['location'],
+        icon: place['icon'],
+        id: place['id'],
+        name: place['name'],
+        type: type,
+      );
+    }).toList();
   }
 }

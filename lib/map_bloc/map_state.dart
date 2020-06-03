@@ -24,23 +24,4 @@ class MapEmpty extends MapState {}
 
 class MapError extends MapState {}
 
-class LookupError extends MapState {}
 
-class AtmLoaded extends MapState {
-  final List<Marker> markers;
-
-  const AtmLoaded({@required this.markers});
-
-  @override 
-  List<Object> get props => [markers];
-
-}
-
-class PharmaLoaded extends MapState {
-  final List<Marker> markers;
-
-  const PharmaLoaded({@required this.markers});
-
-  @override 
-  List<Object> get props => [markers];
-}
