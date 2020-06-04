@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class Place extends Equatable {
-  final Map<String, double> location;
+  final Map<String, dynamic> location;
   final String icon;
   final String id;
   final String name;
@@ -19,12 +19,8 @@ class Place extends Equatable {
 
   static List<Place> fromJson(dynamic json, String type) {
     final List<dynamic> places = json['results'];
-    print('Places: $places');
+    print('Places: ${places.length}');
     return places.map((place) {
-      print('location: ${place['geometry']['location']}');
-      print('icon: ${place['icon']}');
-      print('id: ${place['id']}');
-      print('name: ${place['name']}');
       return Place(
         location: place['geometry']['location'],
         icon: place['icon'],

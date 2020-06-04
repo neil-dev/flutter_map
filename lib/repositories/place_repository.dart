@@ -15,17 +15,15 @@ class PlaceRepository {
   }) async {
     final places = await apiClient.getPlaces(
         location: location, radius: radius, type: type);
-    print('Places: $places');
     return places
         .map((place) => Marker(
               markerId: MarkerId(place.id),
               position: LatLng(place.location['lat'], place.location['lng']),
               draggable: false,
               infoWindow: InfoWindow(title: place.name),
-              onTap: () {},
-              icon: BitmapDescriptor.defaultMarkerWithHue(
-                BitmapDescriptor.hueGreen,
-              ),
+              onTap: () {
+
+              },
               visible: true,
             ))
         .toList();
