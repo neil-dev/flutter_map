@@ -16,7 +16,8 @@ class ApiClient {
     @required int radius,
     @required String type,
   }) async {
-    final response = await getResponse(location: location, radius: radius, type: type);
+    final response =
+        await getResponse(location: location, radius: radius, type: type);
     final responseJson = jsonDecode(response);
     return Place.fromJson(responseJson, type);
   }

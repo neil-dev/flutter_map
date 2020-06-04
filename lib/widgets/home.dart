@@ -11,13 +11,12 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final PlaceRepository placeRepository = PlaceRepository(
-    apiClient: ApiClient(
-      httpClient: http.Client(),
-    ),
-  );
+      apiClient: ApiClient(
+        httpClient: http.Client(),
+      ),
+    );
     ApiKey k;
-    if (k == null)
-      print('null');
+    if (k == null) print('null');
     // print('${k.getKey}');
     final mediaQuery = MediaQuery.of(context);
     print('height: ${mediaQuery.size.height}\twidth: ${mediaQuery.size.width}');
@@ -26,14 +25,41 @@ class Home extends StatelessWidget {
       body: BlocBuilder<MapBloc, MapState>(
         builder: (context, state) {
           if (state is MapLoaded) {
-            return Column(
-              children: <Widget>[
-                SizedBox(height: mediaQuery.size.height * 0.015),
-                LocationBar(state.placeName),
-                SizedBox(height: mediaQuery.size.height * 0.015),
-                BlocProvider(create: (context) => LookupBloc(placeRepository: placeRepository),child: MapViewer(state.currentPosition),),
-                
-              ],
+            return Container(
+              child: BlocProvider(
+                create: (context) =>
+                    LookupBloc(placeRepository: placeRepository),
+                child: Stack(
+                  children: <Widget>[
+                    MapViewer(state.currentPosition),
+                    Positioned(
+                      child: LocationBar(state.placeName),
+                      top: mediaQuery.size.height * 0.02,
+                      left: mediaQuery.size.width * 0.03,
+                    ),
+                    Positioned(
+                      width: mediaQuery.size.width * 0.8,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: <Widget>[
+                          ChoiceCard(
+                            currentPosition: state.currentPosition,
+                            type: 'atm',
+                            icon: Icon(Icons.atm),
+                          ),
+                          ChoiceCard(
+                            currentPosition: state.currentPosition,
+                            type: 'pharmacy',
+                            icon: Icon(Icons.local_pharmacy),
+                          ),
+                        ],
+                      ),
+                      top: mediaQuery.size.height * 0.08,
+                      left: mediaQuery.size.width * 0.03,
+                    ),
+                  ],
+                ),
+              ),
             );
           } else {
             return Center(

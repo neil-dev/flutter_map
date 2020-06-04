@@ -21,9 +21,7 @@ class PlaceRepository {
               position: LatLng(place.location['lat'], place.location['lng']),
               draggable: false,
               infoWindow: InfoWindow(title: place.name),
-              onTap: () {
-
-              },
+              onTap: () {},
               visible: true,
             ))
         .toList();
