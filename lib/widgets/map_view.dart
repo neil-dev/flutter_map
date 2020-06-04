@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/lookup_bloc/bloc.dart';
 import 'package:flutter_map/lookup_bloc/lookup_bloc.dart';
-import 'dart:async';
+
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:flutter_map/repositories/repositories.dart';
-import 'package:http/http.dart' as http;
+
 
 class MapViewer extends StatefulWidget {
   final LatLng currentPosition;
@@ -19,11 +18,7 @@ class MapViewer extends StatefulWidget {
 class _MapViewerState extends State<MapViewer> {
   GoogleMapController _controller;
   Set<Marker> _markers = {};
-  // final PlaceRepository placeRepository = PlaceRepository(
-  //   apiClient: ApiClient(
-  //     httpClient: http.Client(),
-  //   ),
-  // );
+
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +90,7 @@ class _MapViewerState extends State<MapViewer> {
                   ),
                   onTap: () {
                     BlocProvider.of<LookupBloc>(context).add(AtmLookup(
-                        location: widget.currentPosition, radius: 5000));
+                        location: widget.currentPosition, radius: 2000));
                   },
                 ),
                 InkWell(
@@ -116,7 +111,7 @@ class _MapViewerState extends State<MapViewer> {
                   ),
                   onTap: () {
                     BlocProvider.of<LookupBloc>(context).add(PharmaLookup(
-                        location: widget.currentPosition, radius: 5000));
+                        location: widget.currentPosition, radius: 2000));
                   },
                 ),
               ],
