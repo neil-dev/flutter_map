@@ -1,16 +1,17 @@
 # flutter_map
 
-A new Flutter project.
+A Flutter app made to showcase the use of Google Places API to show the locations of nearby places such as atms and pharmacies on a map.
 
-## Getting Started
+## APIs
 
-This project is a starting point for a Flutter application.
+- Google Maps API.
+- Google Places API.
 
-A few resources to get you started if this is your first Flutter project:
+## Screenshots
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+<p><img src="https://i.imgur.com/MebTwkm.png" width="200px" height="300px"/></span> <img src="https://i.imgur.com/VKIbc84.png" width="200px" height="300px"/></p>
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+## Architecture
+
+Bloc Pattern - [flutter_bloc](https://pub.dev/packages/flutter_bloc)
