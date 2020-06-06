@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/lookup_bloc/bloc.dart';
 import 'package:flutter_map/map_bloc/bloc.dart';
-import 'package:flutter_map/models/key.dart';
 import 'package:flutter_map/widgets/widgets.dart';
 import 'package:flutter_map/repositories/repositories.dart';
 import 'package:http/http.dart' as http;
@@ -15,9 +14,6 @@ class Home extends StatelessWidget {
         httpClient: http.Client(),
       ),
     );
-    ApiKey k;
-    if (k == null) print('null');
-    // print('${k.getKey}');
     final mediaQuery = MediaQuery.of(context);
     print('height: ${mediaQuery.size.height}\twidth: ${mediaQuery.size.width}');
     return Scaffold(
