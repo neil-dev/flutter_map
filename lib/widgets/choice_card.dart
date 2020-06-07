@@ -26,7 +26,7 @@ class ChoiceCard extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: isTapped ? Colors.red[300] : Colors.white,
-          boxShadow: [
+          boxShadow: isTapped ? [] : [
             BoxShadow(
               color: Colors.black26,
               offset: Offset(-2, 5),

@@ -31,3 +31,19 @@ class PharmaLoaded extends LookupState {
   @override 
   List<Object> get props => [markers];
 }
+class RestaurantLoaded extends LookupState {
+  final List<Marker> markers;
+
+  const RestaurantLoaded({@required this.markers});
+
+  @override 
+  List<Object> get props => [markers];
+}
+class HospitalLoaded extends LookupState {
+  final List<Marker> markers;
+
+  const HospitalLoaded({@required this.markers});
+
+  @override 
+  List<Object> get props => [markers];
+}

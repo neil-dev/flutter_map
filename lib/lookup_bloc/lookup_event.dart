@@ -27,3 +27,25 @@ class PharmaLookup extends LookupEvent {
   @override 
   List<Object> get props => [location, radius, type];
 }
+
+class RestaurantLookup extends LookupEvent {
+  final LatLng location;
+  final int radius;
+  final type = 'restaurant';
+
+  const RestaurantLookup({@required this.location, @required this.radius}) : assert(location != null, radius != null);
+
+  @override 
+  List<Object> get props => [location, radius, type];
+}
+
+class HospitalLookup extends LookupEvent {
+  final LatLng location;
+  final int radius;
+  final type = 'hospital';
+
+  const HospitalLookup({@required this.location, @required this.radius}) : assert(location != null, radius != null);
+
+  @override 
+  List<Object> get props => [location, radius, type];
+}

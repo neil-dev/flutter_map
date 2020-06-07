@@ -24,6 +24,10 @@ class LookupBloc extends Bloc<LookupEvent, LookupState> {
       yield* _mapAtmLookupToState(event);
     } else if (event is PharmaLookup) {
       yield* _mapPharmaLookupToState(event);
+    } else if (event is RestaurantLookup) {
+      yield* _mapRestaurantLookupToState(event);
+    } else if (event is HospitalLookup) {
+      yield* _mapHospitalLookupToState(event);
     }
   }
 
@@ -42,6 +46,24 @@ class LookupBloc extends Bloc<LookupEvent, LookupState> {
       final markers = await placeRepository.getPlacesMarkers(
           location: event.location, radius: event.radius, type: event.type);
       yield PharmaLoaded(markers: markers);
+    } catch (_) {
+      yield LookupError();
+    }
+  }
+  Stream<LookupState> _mapRestaurantLookupToState(RestaurantLookup event) async* {
+    try {
+      final markers = await placeRepository.getPlacesMarkers(
+          location: event.location, radius: event.radius, type: event.type);
+      yield RestaurantLoaded(markers: markers);
+    } catch (_) {
+      yield LookupError();
+    }
+  }
+  Stream<LookupState> _mapHospitalLookupToState(HospitalLookup event) async* {
+    try {
+      final markers = await placeRepository.getPlacesMarkers(
+          location: event.location, radius: event.radius, type: event.type);
+      yield HospitalLoaded(markers: markers);
     } catch (_) {
       yield LookupError();
     }

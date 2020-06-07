@@ -42,7 +42,6 @@ class _MapViewerState extends State<MapViewer> {
           onMapCreated: (GoogleMapController controller) {
             this._controller = controller;
           },
-          myLocationButtonEnabled: true,
           markers: _markers,
         );
       }
@@ -52,7 +51,7 @@ class _MapViewerState extends State<MapViewer> {
         },
         initialCameraPosition: CameraPosition(
           target: widget.currentPosition,
-          zoom: 11,
+          zoom: 13,
         ),
         markers: _markers,
       );

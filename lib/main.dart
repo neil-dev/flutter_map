@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
         create: (context) => MapBloc()..add(AppStarted()),
         child: Home(),
       ),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
