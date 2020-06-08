@@ -36,12 +36,19 @@ class _HomeState extends State<Home> {
                 child: Stack(
                   alignment: Alignment.center,
                   children: <Widget>[
+                    
                     MapViewer(state.currentPosition),
                     Positioned(
                       child: LocationBar(state.placeName),
                       top: mediaQuery.size.height * 0.05,
                     ),
                     MapOptions(currentPosition: state.currentPosition),
+                    // Container(
+                    //   height: 100,
+                    //   width: 100,
+                    //   color: Colors.white,
+                    //   child: Image.asset('assets/marker.png'),
+                    // ),
                   ],
                 ),
               ),
