@@ -32,7 +32,7 @@ class ChoiceCard extends StatelessWidget {
               offset: Offset(-2, 5),
               spreadRadius: 3,
               blurRadius: 2,
-            )
+            ),
           ],
         ),
         padding: EdgeInsets.all(10),

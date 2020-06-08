@@ -13,6 +13,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   
+  
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class _HomeState extends State<Home> {
     print('height: ${mediaQuery.size.height}\twidth: ${mediaQuery.size.width}');
     return Scaffold(
       // appBar: AppBar(title: Text('Map')),
-      
+
       body: BlocBuilder<MapBloc, MapState>(
         builder: (context, state) {
           if (state is MapLoaded) {
@@ -36,19 +37,17 @@ class _HomeState extends State<Home> {
                 child: Stack(
                   alignment: Alignment.center,
                   children: <Widget>[
-                    
                     MapViewer(state.currentPosition),
                     Positioned(
                       child: LocationBar(state.placeName),
                       top: mediaQuery.size.height * 0.05,
                     ),
                     MapOptions(currentPosition: state.currentPosition),
-                    // Container(
-                    //   height: 100,
-                    //   width: 100,
-                    //   color: Colors.white,
-                    //   child: Image.asset('assets/marker.png'),
-                    // ),
+                    Positioned(
+                      bottom: mediaQuery.size.height * 0.1,
+                      right: mediaQuery.size.width * 0.05,
+                      child: ZoomController(),
+                    ),
                   ],
                 ),
               ),
@@ -63,5 +62,3 @@ class _HomeState extends State<Home> {
     );
   }
 }
-
-
