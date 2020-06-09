@@ -12,9 +12,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  
-  
-
   @override
   Widget build(BuildContext context) {
     final PlaceRepository placeRepository = PlaceRepository(
@@ -46,7 +43,13 @@ class _HomeState extends State<Home> {
                     Positioned(
                       bottom: mediaQuery.size.height * 0.1,
                       right: mediaQuery.size.width * 0.05,
-                      child: ZoomController(),
+                      child: Column(
+                        children: <Widget>[
+                          LocationButton(),
+                          SizedBox(height: 40),
+                          ZoomController(),
+                        ],
+                      ),
                     ),
                   ],
                 ),

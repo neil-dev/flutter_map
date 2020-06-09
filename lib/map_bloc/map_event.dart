@@ -8,4 +8,10 @@ abstract class MapEvent extends Equatable {
 
 class AppStarted extends MapEvent {}
 
+class MapMoved extends MapEvent {}
 
+class RefreshMap extends MapEvent {}
+
+class ZoomIn extends MapEvent {}
+
+class ZoomOut extends MapEvent {}
