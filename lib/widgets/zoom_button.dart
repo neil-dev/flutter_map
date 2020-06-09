@@ -1,27 +1,66 @@
 import 'package:flutter/material.dart';
 
-class ZoomButton extends StatelessWidget {
+class ZoomButton extends StatefulWidget {
   const ZoomButton({
     Key key,
     @required this.icon,
-    @required this.isTapped,
   }) : super(key: key);
 
-  
-  final double buttonHeight = 35;
   final IconData icon;
-  final bool isTapped;
+
+  @override
+  _ZoomButtonState createState() => _ZoomButtonState();
+}
+
+class _ZoomButtonState extends State<ZoomButton> with TickerProviderStateMixin {
+  final double buttonHeight = 35;
+  AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 500));
+  }
+
+  void _onTap() {
+    _controller.reset();
+    _controller.forward();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: isTapped ? Colors.red[300] : Colors.white,
-      width: double.infinity,
-      height: buttonHeight,
-      child: Icon(
-        icon,
-        color: isTapped ? Colors.white : Colors.red[300],
-      ),
+    return AnimatedBuilder(
+      animation: _controller,
+      builder: (context, _) {
+        double value = _controller.value;
+        return InkWell(
+          onTap: _onTap,
+          child: Container(
+            decoration: BoxDecoration(
+              color:
+                  value > 0.2 && value < 0.8 ? Colors.red[300] : Colors.white,
+              boxShadow: value > 0.2 && value < 0.8
+                  ? [
+                      BoxShadow(
+                        color: Colors.white70,
+                        offset: Offset(-2, 5),
+                        spreadRadius: 3,
+                        blurRadius: 2,
+                      ),
+                    ]
+                  : [],
+            ),
+            width: double.infinity,
+            height: buttonHeight,
+            child: Icon(
+              widget.icon,
+              color:
+                  value > 0.2 && value < 0.8 ? Colors.white : Colors.red[300],
+            ),
+          ),
+        );
+      },
     );
   }
 }

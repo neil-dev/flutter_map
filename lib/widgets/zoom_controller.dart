@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 import 'zoom_button.dart';
 
 class ZoomController extends StatelessWidget {
-
-  bool isPlusTapped = false;
-  bool isMinusTapped = false;
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -26,7 +22,6 @@ class ZoomController extends StatelessWidget {
         children: <Widget>[
           ZoomButton(
             icon: Icons.add,
-            isTapped: isPlusTapped,
           ),
           Container(
             height: 1,
@@ -35,7 +30,6 @@ class ZoomController extends StatelessWidget {
           ),
           ZoomButton(
             icon: Icons.remove,
-            isTapped: isMinusTapped,
           ),
         ],
       ),
