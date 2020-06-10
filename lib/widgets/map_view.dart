@@ -56,7 +56,7 @@ class _MapViewerState extends State<MapViewer> {
               _zoomValue -= 0.3;
               _controller.moveCamera(
                 CameraUpdate.newLatLngZoom(widget.currentPosition, _zoomValue));
-          }
+          } 
       },
           child: BlocConsumer<LookupBloc, LookupState>(
         listener: (context, state) {

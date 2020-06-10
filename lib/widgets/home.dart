@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/lookup_bloc/bloc.dart';
 import 'package:flutter_map/map_bloc/bloc.dart';
+import 'package:flutter_map/change_bloc/bloc.dart';
 import 'package:flutter_map/widgets/widgets.dart';
 import 'package:flutter_map/repositories/repositories.dart';
 import 'package:http/http.dart' as http;
@@ -28,9 +29,17 @@ class _HomeState extends State<Home> {
         builder: (context, state) {
           if (state is MapLoaded) {
             return Container(
-              child: BlocProvider(
-                create: (context) =>
-                    LookupBloc(placeRepository: placeRepository),
+              child: MultiBlocProvider(
+                providers: [
+                  BlocProvider<LookupBloc>(
+                    create: (context) =>
+                        LookupBloc(placeRepository: placeRepository),
+                  ),
+                  BlocProvider<ChangeBloc>(
+                    create: (context) =>
+                        ChangeBloc(),
+                  ),
+                ],
                 child: Stack(
                   alignment: Alignment.center,
                   children: <Widget>[
