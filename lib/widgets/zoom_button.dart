@@ -4,9 +4,11 @@ class ZoomButton extends StatefulWidget {
   const ZoomButton({
     Key key,
     @required this.icon,
+    @required this.onTap,
   }) : super(key: key);
 
   final IconData icon;
+  final Function onTap;
 
   @override
   _ZoomButtonState createState() => _ZoomButtonState();
@@ -24,8 +26,9 @@ class _ZoomButtonState extends State<ZoomButton> with TickerProviderStateMixin {
   }
 
   void _onTap() {
-    _controller.reset();
-    _controller.forward();
+    // _controller.reset();
+    // _controller.forward();
+    widget.onTap();
   }
 
   @override

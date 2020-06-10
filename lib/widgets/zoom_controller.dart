@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'zoom_button.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_map/change_bloc/bloc.dart';
 
 class ZoomController extends StatelessWidget {
   @override
@@ -22,6 +24,7 @@ class ZoomController extends StatelessWidget {
         children: <Widget>[
           ZoomButton(
             icon: Icons.add,
+            onTap: () => BlocProvider.of<ChangeBloc>(context).add(ZoomIn()),
           ),
           Container(
             height: 1,
@@ -30,6 +33,7 @@ class ZoomController extends StatelessWidget {
           ),
           ZoomButton(
             icon: Icons.remove,
+            onTap: () => BlocProvider.of<ChangeBloc>(context).add(ZoomOut()),
           ),
         ],
       ),

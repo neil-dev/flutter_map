@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_map/change_bloc/bloc.dart';
 
 class LocationButton extends StatelessWidget {
   final double locationButtonSize = 50;
@@ -6,6 +8,9 @@ class LocationButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      onTap: () {
+        BlocProvider.of<ChangeBloc>(context).add(RefreshMap());
+      },
       child: Container(
         height: locationButtonSize,
         width: locationButtonSize,
