@@ -7,7 +7,7 @@ import 'package:flutter_map/change_bloc/bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapViewer extends StatefulWidget {
-  LatLng currentPosition;
+  final LatLng currentPosition;
 
   MapViewer(this.currentPosition);
 
@@ -16,26 +16,29 @@ class MapViewer extends StatefulWidget {
 }
 
 class _MapViewerState extends State<MapViewer> {
+  
   GoogleMapController _controller;
   Set<Marker> _markers = {};
   BitmapDescriptor locationPin;
   Marker currentLocationMarker;
   double _zoomValue = 11;
+  LatLng _currentPosition;
 
   @override
   void initState() {
+    _currentPosition = widget.currentPosition;
     setCustomPin();
     currentLocationMarker = Marker(
       markerId: MarkerId('currentLocation'),
       icon: locationPin,
-      position: widget.currentPosition,
+      position: _currentPosition,
     );
     super.initState();
   }
 
   void setCustomPin() async {
     locationPin = await BitmapDescriptor.fromAssetImage(
-        ImageConfiguration(devicePixelRatio: 2.66), 'assets/pin.png');
+        ImageConfiguration(), 'assets/pin.png');
   }
 
   @override
@@ -44,19 +47,19 @@ class _MapViewerState extends State<MapViewer> {
       listener: (context, state) {
         if (state is MapRefreshed) {
           setState(() {
-            widget.currentPosition = state.currentPosition;
+            _currentPosition = state.currentPosition;
             _controller
-                .moveCamera(CameraUpdate.newLatLng(widget.currentPosition));
+                .moveCamera(CameraUpdate.newLatLng(_currentPosition));
           });
         } else if (state is ZoomInState) {
           _zoomValue += 0.3;
           _controller.moveCamera(
-              CameraUpdate.newLatLngZoom(widget.currentPosition, _zoomValue));
+              CameraUpdate.newLatLngZoom(_currentPosition, _zoomValue));
               BlocProvider.of<ChangeBloc>(context).add(MapMoved());
         } else if (state is ZoomOutState) {
           _zoomValue -= 0.3;
           _controller.moveCamera(
-              CameraUpdate.newLatLngZoom(widget.currentPosition, _zoomValue));
+              CameraUpdate.newLatLngZoom(_currentPosition, _zoomValue));
               BlocProvider.of<ChangeBloc>(context).add(MapMoved());
         }
       },
@@ -91,7 +94,7 @@ class _MapViewerState extends State<MapViewer> {
               state is HospitalLoaded) {
             _zoomValue = 13;
             _controller.moveCamera(
-                CameraUpdate.newLatLngZoom(widget.currentPosition, _zoomValue));
+                CameraUpdate.newLatLngZoom(_currentPosition, _zoomValue));
           }
           return GoogleMap(
             onMapCreated: (GoogleMapController controller) {
@@ -100,20 +103,20 @@ class _MapViewerState extends State<MapViewer> {
                 currentLocationMarker = Marker(
                   markerId: MarkerId('currentLocation'),
                   icon: locationPin,
-                  position: widget.currentPosition,
+                  position: _currentPosition,
                 );
                 _markers.add(currentLocationMarker);
               });
               this._controller = controller;
             },
             initialCameraPosition: CameraPosition(
-              target: widget.currentPosition,
+              target: _currentPosition,
               zoom: _zoomValue,
             ),
             markers: _markers,
             zoomControlsEnabled: false,
             onCameraMove: (cameraposition)  {     
-              if (cameraposition.target != widget.currentPosition) {
+              if (cameraposition.target != _currentPosition) {
                 BlocProvider.of<ChangeBloc>(context).add(MapMoved());
               }
             },
