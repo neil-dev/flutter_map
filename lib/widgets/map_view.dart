@@ -42,23 +42,25 @@ class _MapViewerState extends State<MapViewer> {
   Widget build(BuildContext context) {
     return BlocListener<ChangeBloc, ChangeState>(
       listener: (context, state) {
-          if (state is MapRefreshed) {
-            setState(() {
-              widget.currentPosition = state.currentPosition;
-              _controller.moveCamera(CameraUpdate.newLatLng(widget.currentPosition));
-            });
-          } else if (state is ZoomInState) {
-              _zoomValue += 0.3;
-              _controller.moveCamera(
-                CameraUpdate.newLatLngZoom(widget.currentPosition, _zoomValue));
-          }
-           else if (state is ZoomOutState) {
-              _zoomValue -= 0.3;
-              _controller.moveCamera(
-                CameraUpdate.newLatLngZoom(widget.currentPosition, _zoomValue));
-          } 
+        if (state is MapRefreshed) {
+          setState(() {
+            widget.currentPosition = state.currentPosition;
+            _controller
+                .moveCamera(CameraUpdate.newLatLng(widget.currentPosition));
+          });
+        } else if (state is ZoomInState) {
+          _zoomValue += 0.3;
+          _controller.moveCamera(
+              CameraUpdate.newLatLngZoom(widget.currentPosition, _zoomValue));
+              BlocProvider.of<ChangeBloc>(context).add(MapMoved());
+        } else if (state is ZoomOutState) {
+          _zoomValue -= 0.3;
+          _controller.moveCamera(
+              CameraUpdate.newLatLngZoom(widget.currentPosition, _zoomValue));
+              BlocProvider.of<ChangeBloc>(context).add(MapMoved());
+        }
       },
-          child: BlocConsumer<LookupBloc, LookupState>(
+      child: BlocConsumer<LookupBloc, LookupState>(
         listener: (context, state) {
           if (state is AtmLoaded) {
             setState(() {
@@ -87,7 +89,7 @@ class _MapViewerState extends State<MapViewer> {
               state is PharmaLoaded ||
               state is RestaurantLoaded ||
               state is HospitalLoaded) {
-                _zoomValue = 13;
+            _zoomValue = 13;
             _controller.moveCamera(
                 CameraUpdate.newLatLngZoom(widget.currentPosition, _zoomValue));
           }
@@ -110,8 +112,10 @@ class _MapViewerState extends State<MapViewer> {
             ),
             markers: _markers,
             zoomControlsEnabled: false,
-            onCameraMoveStarted: () {
-              // BlocProvider.of<MapBloc>(context).add(MapMoved());
+            onCameraMove: (cameraposition)  {     
+              if (cameraposition.target != widget.currentPosition) {
+                BlocProvider.of<ChangeBloc>(context).add(MapMoved());
+              }
             },
           );
         },

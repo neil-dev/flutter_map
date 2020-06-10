@@ -26,8 +26,8 @@ class _ZoomButtonState extends State<ZoomButton> with TickerProviderStateMixin {
   }
 
   void _onTap() {
-    // _controller.reset();
-    // _controller.forward();
+    _controller.reset();
+    _controller.forward();
     widget.onTap();
   }
 
