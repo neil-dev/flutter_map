@@ -36,8 +36,7 @@ class _HomeState extends State<Home> {
                         LookupBloc(placeRepository: placeRepository),
                   ),
                   BlocProvider<ChangeBloc>(
-                    create: (context) =>
-                        ChangeBloc(),
+                    create: (context) => ChangeBloc(),
                   ),
                 ],
                 child: Stack(
