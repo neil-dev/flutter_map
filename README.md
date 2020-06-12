@@ -6,6 +6,7 @@ A Flutter app made to showcase the use of Google Places API to show the location
 
 - State Management using Bloc Pattern.
 - Integrating Google Places API with your App.
+- Getting current location using Geolocator package.
 - Google Map features like creation of markers, managing zoom and recentre.
 - Searching for nearby places.
 - Making custom animated buttons.
@@ -14,6 +15,7 @@ A Flutter app made to showcase the use of Google Places API to show the location
 
 - Google Maps API.
 - Google Places API.
+- Geolocator API.
 
 ## Screenshots
 
