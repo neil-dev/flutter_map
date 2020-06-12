@@ -2,6 +2,14 @@
 
 A Flutter app made to showcase the use of Google Places API to show the locations of nearby places such as atms and pharmacies on a map.
 
+## What will you learn?
+
+- State Management using Bloc Pattern.
+- Integrating Google Places API with your App.
+- Google Map features like creation of markers, managing zoom and recentre.
+- Searching for nearby places.
+- Making custom animated buttons.
+
 ## APIs
 
 - Google Maps API.
