@@ -1,6 +1,6 @@
 # flutter_map
 
-A Flutter app made to showcase the use of Google Places API to show the locations of nearby places such as atms and pharmacies on a map.
+A Flutter app made to showcase the use of Google Places API to show the locations of nearby places such as atms, restaurants and pharmacies on a map.
 
 ## What will you learn?
 
